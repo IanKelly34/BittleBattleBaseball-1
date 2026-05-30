@@ -604,11 +604,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
             let random = this.GenerateRandomNumber(0, 1);
@@ -620,11 +616,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           }
         }
@@ -647,11 +639,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
             let random = this.GenerateRandomNumber(0, 2);
@@ -663,11 +651,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           }
         }
@@ -690,11 +674,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
             let random = this.GenerateRandomNumber(0, 2);
@@ -706,11 +686,7 @@ export class GameplayComponent implements OnInit {
             } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
-              if (this.Game.CurrentInning.IsBottomOfInning) {
-                this.Game.CurrentInning.HomeOuts++;
-              } else {
-                this.Game.CurrentInning.AwayOuts++;
-              }
+              this.newOuts++;
             }
           }
         }
@@ -830,6 +806,7 @@ export class GameplayComponent implements OnInit {
           }
 
           this.Game.NextInning();
+          this.Game.CurrentInning.IsBottomOfInning = false;
           this.Game.NewAtBat();
         }
         else {
