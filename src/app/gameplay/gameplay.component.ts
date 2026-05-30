@@ -817,19 +817,13 @@ export class GameplayComponent implements OnInit {
   ProcessEndOfOutPlay() {
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts += this.newOuts;
-      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
-        // swal({
-        //   title: "Game Over!",
-        //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-        //   icon: "success",
-        //   dangerMode: true,
-        // })
-        //   .then(() => {
-            this.Game.IsGameInProgress = false;
-         // });
+      this.Game.CurrentInning.HomeOuts = Math.min(3, this.Game.CurrentInning.HomeOuts);
+
+      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts >= 3) {
+        this.Game.IsGameInProgress = false;
       }
       else {
-        if (this.Game.CurrentInning.HomeOuts == 3) {
+        if (this.Game.CurrentInning.HomeOuts >= 3) {
 
           if (this.Game.CurrentInning.InningNumber >= 9) {
             this.Game.Innings.push(new GameInningViewModel(this.Game.CurrentInning.InningNumber + 1))
@@ -845,19 +839,12 @@ export class GameplayComponent implements OnInit {
     }
     else {
       this.Game.CurrentInning.AwayOuts += this.newOuts;
+      this.Game.CurrentInning.AwayOuts = Math.min(3, this.Game.CurrentInning.AwayOuts);
 
-      if (this.Game.CurrentInning.AwayOuts == 3) {
+      if (this.Game.CurrentInning.AwayOuts >= 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
-          // swal({
-          //   title: "Game Over!",
-          //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-          //   icon: "success",
-          //   dangerMode: true,
-          // })
-          //   .then(() => {
-              this.Game.IsGameInProgress = false;
-         //   });
+          this.Game.IsGameInProgress = false;
         } else {
 
           this.Game.CurrentInning.IsBottomOfInning = true;
